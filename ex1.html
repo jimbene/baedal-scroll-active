@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        img {
+            width: 150px;
+            transform: perspective(150px) rotateX(45deg);
+        }
+        .section {
+            margin: 0;
+            width: 100%;
+            height: 800px;
+        }
+        #s1 {
+            background-color: red;
+        }
+        #s2 {
+            background-color: aliceblue;
+        }
+        #s3 {
+            background-color: aqua;
+        }
+        #s4 {
+            background-color: blue;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            display: flex;
+        }
+        li {
+            width: 200px;
+            font-size: 20px;
+            list-style: none;
+            text-align: center;
+            background-color: blueviolet;
+            color: #fff;
+        }
+        .active {
+            background-color: brown;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="s1" class="section"></div>
+    <div id="s2" class="section"></div>
+    <div id="s3" class="section"></div>
+    <div id="s4" class="section"></div>
+    <div id="s5" class="section"></div>
+    <ul>
+        <li><a href="#s1">1</a></li>
+        <li><a href="#s2">2</a></li>
+        <li><a href="#s3">3</a></li>
+        <li><a href="#s4">4</a></li>
+        <li><a href="#s5">5</a></li>
+    </ul>
+    <span>scroll up and down</span>
+    <!-- jQuery UI JS 1.12.0 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <img src="images/menu1.jpg" alt="">
+    <!-- jQuery JS 3.1.0 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js"></script>
+    <script>
+        $('document').ready(function(){
+
+            var s = $('.section');
+            var nav = $('ul li a');
+            s.waypoint({
+                handler: function(direction){
+                    var active = $(this);
+                    if(direction == 'up')
+                        active = active.prev();
+                    var active_link = $('ul li a[href="#'+active.attr('id')+'"]');
+                    
+                
+                    nav.parent().removeClass('active');
+                    active_link.parent().addClass('active');
+                },
+                offset: '35%'
+            });
+
+        });
+        (function($){
+            $('li a').click(function(){
+                console.log($(this).attr('id'));
+                //$('body').scrollTop($(this).attr('id'));
+            });
+        });
+
+
+
+        
+    </script>
+</body>
+</html>
